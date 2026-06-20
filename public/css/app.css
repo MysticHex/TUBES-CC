@@ -1,0 +1,285 @@
+/* ==========================================================================
+   Cloud Computing Project — academic UI with tasteful 3D / animation accents.
+   Built on Bootstrap 5 (loaded via CDN). No build step required.
+   ========================================================================== */
+
+:root {
+    --cc-bg: #0f172a;
+    --cc-surface: #ffffff;
+    --cc-ink: #1e293b;
+    --cc-muted: #64748b;
+    --cc-primary: #4f46e5;
+    --cc-primary-2: #7c3aed;
+    --cc-accent: #06b6d4;
+    --cc-ok: #10b981;
+    --cc-down: #ef4444;
+    --cc-ring: rgba(79, 70, 229, 0.35);
+    --cc-shadow: 0 18px 40px -18px rgba(15, 23, 42, 0.45);
+}
+
+* {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--cc-ink);
+    background:
+        radial-gradient(1200px 600px at 110% -10%, rgba(124, 58, 237, 0.12), transparent 60%),
+        radial-gradient(1000px 500px at -10% 10%, rgba(6, 182, 212, 0.12), transparent 55%),
+        #eef2f9;
+    background-color: #eef2f9;
+    min-height: 100vh;
+}
+
+/* ---------- Layout shell ---------- */
+.app-shell {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 264px;
+    background: linear-gradient(165deg, #111827 0%, #1e1b4b 55%, #312e81 100%);
+    color: #cbd5e1;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(400px 200px at 50% 0%, rgba(124, 58, 237, 0.35), transparent 70%);
+    pointer-events: none;
+    animation: floatGlow 8s ease-in-out infinite alternate;
+}
+
+.brand {
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    background: linear-gradient(90deg, #a5b4fc, #67e8f9, #a5b4fc);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 6s linear infinite;
+}
+
+.sidebar .nav-link {
+    color: #cbd5e1;
+    border-radius: 0.75rem;
+    padding: 0.65rem 0.9rem;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.sidebar .nav-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    transform: translateX(4px);
+}
+
+.sidebar .nav-link.active {
+    background: linear-gradient(90deg, rgba(79, 70, 229, 0.9), rgba(124, 58, 237, 0.85));
+    color: #fff;
+    box-shadow: 0 10px 20px -10px rgba(124, 58, 237, 0.8);
+}
+
+.sidebar .nav-link i {
+    font-size: 1.1rem;
+}
+
+.content {
+    flex: 1;
+    min-width: 0;
+}
+
+.topbar {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+/* ---------- 3D cards ---------- */
+.card-3d {
+    border: 0;
+    border-radius: 1rem;
+    background: var(--cc-surface);
+    box-shadow: var(--cc-shadow);
+    transform-style: preserve-3d;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    will-change: transform;
+}
+
+.card-3d:hover {
+    transform: translateY(-6px) rotateX(3deg) rotateY(-3deg);
+    box-shadow: 0 28px 55px -20px rgba(15, 23, 42, 0.55);
+}
+
+.stat-card {
+    color: #fff;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.stat-card .stat-icon {
+    font-size: 2.4rem;
+    opacity: 0.9;
+    transform: translateZ(40px);
+}
+
+.stat-card .stat-value {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.bg-grad-1 { background: linear-gradient(135deg, #4f46e5, #7c3aed); }
+.bg-grad-2 { background: linear-gradient(135deg, #0891b2, #06b6d4); }
+.bg-grad-3 { background: linear-gradient(135deg, #059669, #10b981); }
+.bg-grad-4 { background: linear-gradient(135deg, #db2777, #f43f5e); }
+
+/* ---------- Server status widget ---------- */
+.server-card {
+    position: relative;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    color: #fff;
+    background: linear-gradient(135deg, #0f172a, #1e1b4b 60%, #312e81);
+    box-shadow: 0 22px 50px -20px rgba(49, 46, 129, 0.9);
+    overflow: hidden;
+}
+
+.server-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(120deg, #06b6d4, #7c3aed, #06b6d4);
+    background-size: 200% 200%;
+    animation: shimmer 5s linear infinite;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.server-label {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    background: var(--cc-ok);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: pulse 1.8s infinite;
+}
+
+.status-dot.down {
+    background: var(--cc-down);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    animation: pulseDown 1.8s infinite;
+}
+
+.server-node {
+    font-size: 4rem;
+    opacity: 0.18;
+    position: absolute;
+    right: 1rem;
+    bottom: -0.5rem;
+    animation: float 5s ease-in-out infinite;
+}
+
+/* ---------- Auth screens ---------- */
+.auth-wrap {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 2rem 1rem;
+    background:
+        radial-gradient(900px 500px at 100% 0%, rgba(124, 58, 237, 0.25), transparent 60%),
+        radial-gradient(900px 500px at 0% 100%, rgba(6, 182, 212, 0.25), transparent 60%),
+        #0f172a;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 430px;
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 30px 70px -25px rgba(0, 0, 0, 0.6);
+    animation: fadeUp 0.6s ease both;
+}
+
+.auth-orb {
+    width: 64px;
+    height: 64px;
+    border-radius: 1.25rem;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    box-shadow: 0 14px 30px -10px rgba(79, 70, 229, 0.8);
+    animation: float 4s ease-in-out infinite;
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@keyframes pulseDown {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+    70% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes floatGlow {
+    0% { transform: translateY(-8px); opacity: 0.7; }
+    100% { transform: translateY(8px); opacity: 1; }
+}
+
+@keyframes shimmer {
+    to { background-position: 200% center; }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .card-3d:hover { transform: none; }
+}
