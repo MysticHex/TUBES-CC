@@ -1,0 +1,21 @@
+# Optional queue worker (QUEUE_CONNECTION=database).
+# Install to: /etc/systemd/system/laravel-worker.service
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now laravel-worker
+#   sudo systemctl status laravel-worker
+# Only needed if the app dispatches queued jobs; the core CRUD app runs without it.
+
+[Unit]
+Description=Laravel queue worker (Cloud Computing app)
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+Restart=always
+RestartSec=5
+WorkingDirectory=/var/www/cloud-app
+ExecStart=/usr/bin/php /var/www/cloud-app/artisan queue:work --sleep=3 --tries=3 --max-time=3600
+
+[Install]
+WantedBy=multi-user.target
