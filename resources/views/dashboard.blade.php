@@ -3,6 +3,12 @@
 @section('title', 'Dashboard')
 
 @section('content')
+    {{-- Load-balancer instance banner --}}
+    <div class="alert alert-success border-0 shadow-sm text-center fw-bold fs-5 text-uppercase mb-4 reveal"
+         style="letter-spacing:2px">
+        <i class="bi bi-hdd-network-fill me-2"></i> WEB INSTANCE 2
+    </div>
+
     <div class="row g-3 g-md-4">
         {{-- Total members --}}
         <div class="col-12 col-sm-6 col-xl-3 reveal">
@@ -50,7 +56,7 @@
 
         {{-- Current server label --}}
         <div class="col-12 col-sm-6 col-xl-3 reveal">
-            <div class="card-3d stat-card bg-grad-1 tilt h-100 p-4">
+            <div class="card-3d stat-card bg-grad-3 tilt h-100 p-4">
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
                         <div class="text-white-50 small text-uppercase fw-semibold">Current Server</div>

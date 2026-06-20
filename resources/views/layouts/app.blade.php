@@ -58,7 +58,7 @@
                 <h1 class="h5 mb-0 fw-bold">@yield('title', 'Dashboard')</h1>
             </div>
             <div class="d-flex align-items-center gap-3">
-                <span class="badge rounded-pill text-bg-dark d-none d-sm-inline-flex align-items-center gap-2 px-3 py-2">
+                <span class="badge rounded-pill text-bg-success d-none d-sm-inline-flex align-items-center gap-2 px-3 py-2">
                     <span class="status-dot"></span> {{ $serverName }}
                 </span>
                 <div class="dropdown">
@@ -95,6 +95,7 @@
 
         <footer class="text-center text-muted small py-3">
             Cloud Computing Project &middot; Served by <strong>{{ $serverName }}</strong>
+            <div class="text-success fw-semibold">Running on AWS EC2 - Instance 2</div>
         </footer>
     </div>
 </div>
